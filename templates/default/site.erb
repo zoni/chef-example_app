@@ -1,0 +1,12 @@
+server {
+	listen 80;
+	server_name <%= node['example_app']['servername'] %>;
+
+	access_log /var/log/nginx/<%= node['example_app']['servername'] %>.access.log;
+	error_log /var/log/nginx/<%= node['example_app']['servername'] %>.error.log;
+
+	location / {
+		proxy_pass http://localhost:1337/;
+		include proxy_params;
+	}
+}
